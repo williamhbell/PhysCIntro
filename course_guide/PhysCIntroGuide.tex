@@ -186,9 +186,9 @@ print a string to the standard output.  The standard output is the
 terminal window or screen.  Therefore information printed to the
 standard output will appear on the terminal window or screen.  Before
 looking at the example program let us look at its design.
-Figure~\ref{figure:flowchart_ex1} illustrates example 1 in \flo
+Figure~\ref{figure:flowchart_ex1} illustrates example 1 in \flo\
 form, \psc~\ref{pseudo:ex1} describes the program using
-\psc and the C implementation of example 1 is given in
+\psc\ and the C implementation of example 1 is given in
 Listing~\ref{listing:ex1}.
 
 \begin{figure}[h]
@@ -224,31 +224,16 @@ int main() {
 \caption{The C implementation of Example 1 \label{listing:ex1}}
 \end{program}
 
-The execution of every program starts from a \main function.  From
-this function other functions can be called.  The return type of \main
-is given by the \texttt{int} prefix.  Within the \linux/UNIX
-environment the operating system expects a program to return an exit
-condition.  The value of the return statement from the \main\ function
-is collected by the operating system and is available to a user to
-query.  Following the execution of the program the return value can
-be queried by typing
+The execution of every program starts from a \main\ function.  From this function other functions can be called.  The return type of \main\ is given by the \texttt{int} prefix.  Within the \linux/UNIX environment the operating system expects a program to return an exit condition.  The value of the return statement from the \main\ function is collected by the operating system and is available to a user to query.  Following the execution of the program the return value can be queried by typing
 \begin{verbatim}
 ]$ echo $?
 \end{verbatim}
-where \texttt{$]\$$} is the LINUX prompt.
+where \texttt{$]\$$} is the \linux\ prompt.
 
 The contents of the \main\ function are delimited by the brackets
 \texttt{\{ \}}, which represent a compound statement.  Inside this
 compound statement there may be several statements each terminated by a
-`\texttt{;}' character, together with other compound statements.  In
-this example the \main function only contains two statements: one to
-print a string to the standard output and one to return the exit value to
-the operating system.  The first of these statements prints a string
-to the screen by calling the standard output function
-\texttt{printf}.  This string is terminated by the end of line character \texttt{$\backslash$n}.  At the top of the example, the
-pre-declaration of the \texttt{printf} function is included by
-including the header file \texttt{stdio.h}.  When this program
-compiles the compiler reads the pre-declaration of \texttt{printf}
+`\texttt{;}' character, together with other compound statements.  In this example the \main\ function only contains two statements: one to print a string to the standard output and one to return the exit value to the operating system.  The first of these statements prints a string to the screen by calling the standard output function \texttt{printf}.  This string is terminated by the end of line character \texttt{$\backslash$n}.  At the top of the example, the pre-declaration of the \texttt{printf} function is included by including the header file \texttt{stdio.h}.  When this program is compiled, the compiler reads the pre-declaration of \texttt{printf}
 from the header file and leaves a call in the machine code to be
 resolved at link time.  Above the \texttt{\#include} statement is a
 comment.  Comments in C can be entered using
@@ -305,52 +290,24 @@ quitTime()
 
 \paragraph{Functions}
 The syntax of loops, conditional statements and functions are
-demonstrated by example 2.  This example contains an \intmain function
-as before.  Within the \main three functions are called:
+demonstrated by example 2.  This example contains an \intmain\ function
+as before.  Within the \main\ three functions are called:
 \texttt{numFingers}, \texttt{pickColour}, and
-\texttt{quitTime}.  Each function is pre-declared before the \main
-function.  Each pre-declaration is a statement where the return type,
-and input parameter types must be given.  The \void type simply means that
-no input parameter or return value is expected.  All functions must be
-either predeclared or declared before they are used.  There are three
-pre-declaration statements before the \main function.
+\texttt{quitTime}.  Each function is pre-declared before the \main\ function.  Each pre-declaration is a statement where the return type, and input parameter types must be given.  The \void\ type simply means that no input parameter or return value is expected.  All functions must be either predeclared or declared before they are used.  There are three pre-declaration statements before the \main\ function.
 \begin{lstlisting}
 void numFingers(void);
 void pickColour(void);
 bool quitTime(void);
 \end{lstlisting}
-The implementation of these functions is given after the \main
-function.  Following the same syntax as the \main function the
-implementation of each of these three functions has a return type, a
-series of input types, and a compound statement enclosing the function
-contents.  If any input parameters are present then their names must
-be given.  These input variables are introduced with the values passed
-into the function when the function is called.  If the implementation
-is not given in either the code to be compiled or libraries to be
-linked in a linker error will result.
+The implementation of these functions is given after the \main\ function.  Following the same syntax as the \main\ function the implementation of each of these three functions has a return type, a series of input types, and a compound statement enclosing the function contents.  If any input parameters are present then their names must be given.  These input variables are introduced with the values passed into the function when the function is called.  If the implementation is not given in either the code to be compiled or libraries to be linked in a linker error will result.
 
-It should be noted that while in this example the function
-pre-declarations are given before the \main and the implementation
+It should be noted that while in this example the function pre-declarations are given before the \main\ and the implementation
 comes afterwards, the example would work just as well with the
-implementation before the \main and no pre-declarations.  The use of
-pre-declarations at this point is a lead-in to the usage of header
-files which are later introduced in example 5.
+implementation before the \main\ and no pre-declarations.  The use of pre-declarations at this point is a lead-in to the usage of header files which are later introduced in example 5.
 
 \paragraph{Conditional Statements}
-Common ways of writing conditional statements involve either
-\texttt{if},~\texttt{if~else},~\texttt{else} or \texttt{switch}
-statements.  There are other ways of constructing conditional
-statements but these are not covered in this course.  Starting with
-\texttt{if},~\texttt{if~else},~\texttt{else} statements, examples of
-their syntax are given within the \texttt{numFingers} and \texttt{quitTime}
-functions of example 2.  Each \texttt{if} statement is evaluated such
-that when the contents of the logic associated with an \texttt{if} statement
-inside the \texttt{()} brackets is true, then the code within the
-following compound statement is executed.
-\texttt{if},~\texttt{if~else},~\texttt{else} statements operate
-sequentially such that each piece of logic is tested in turn.  If all
-the logic tests fail then the statement following \texttt{else} is
-executed.
+Common ways of writing conditional statements involve either \texttt{if},~\texttt{if~else},~\texttt{else} or \texttt{switch} statements.  There are other ways of constructing conditional statements but these are not covered in this course.  Starting with \texttt{if},~\texttt{if~else},~\texttt{else} statements, examples of their syntax are given within the \texttt{numFingers} and \texttt{quitTime} functions of example 2.  Each \texttt{if} statement is evaluated such that when the contents of the logic associated with an \texttt{if} statement inside the \texttt{()} brackets is true, then the code within the following compound statement is executed.\texttt{if},~\texttt{if~else},~\texttt{else} statements operate
+sequentially, such that each piece of logic is tested in turn.  If all the logic tests fail then the statement following \texttt{else} is executed.
 
 In some cases where simple sorting is needed a \texttt{switch}
 statement is a better choice than a long
@@ -376,17 +333,17 @@ remains true until the function \texttt{quitTime} returns a true.  The
 
 \subsection{Pointers and Arrays \label{section:pointersarrays}}
 
-Many languages use pointers implicitly such as \fortran and Java.  In
+Many languages use pointers implicitly such as \fortran\ and Java.  In
 C pointers are used explicitly.  This section introduces the concept
 of a pointer and demonstrates two basic implementations.  The design
-of the program is given in \flo form in
-figure~\ref{figure:flowchart_ex3} and in \psc form in
+of the program is given in \flo\ form in
+figure~\ref{figure:flowchart_ex3} and in \psc\ form in
 \psc~\ref{pseudo:ex3}.
 
 \begin{figure}[h]
 \begin{center}
 \includegraphics[height=11cm]{figures/ex3}
-\caption{A flowchart describing the \main function of example 3
+\caption{A flowchart describing the \main\ function of example 3
 \label{figure:flowchart_ex3}}
 \end{center}
 \end{figure}
@@ -434,7 +391,7 @@ fashion can be seen from running the program.  After calling
 before the function call, while the value contained in \texttt{p} is
 the value assigned via the pointer in
 \texttt{fun}.  Stepping through the program this can be explained.
-Both \texttt{np} and \texttt{p} are initialised in the \main with the
+Both \texttt{np} and \texttt{p} are initialised in the \main\ with the
 value one.
 \begin{lstlisting}
 int np = 1, p = 1;
@@ -444,18 +401,18 @@ is allocated to \texttt{np} and \texttt{p}.  Then the function
 \texttt{fun} is called with the value of \texttt{np} (default in C) and the
 address of \texttt{p}.  Within the function \texttt{fun} a new block
 of memory is allocated for the local variable \texttt{np} distinct
-from the variable contained in the \main function.  This memory is
+from the variable contained in the \main\ function.  This memory is
 given the value from the parameter \texttt{np} contained within
 \main.  The value 2 is assigned to the local variable \texttt{np}
 and as the function exits, the memory of the local variable \texttt{np}
-is deleted.  Therefore the value is never set within the \main
+is deleted.  Therefore the value is never set within the \main\
 function.  Unlike \texttt{np} the value of the variable \texttt{p}
 declared within
-the \main is set by using a pointer.  The pointer is initialised with the
-memory address of the variable \texttt{p} contained within the \main
+the \main\ is set by using a pointer.  The pointer is initialised with the
+memory address of the variable \texttt{p} contained within the \main\
 function.  Then the memory address pointed to by the pointer
 \texttt{*p} is assigned the value 2.  Therefore when returning to the
-\main function the value contained in the memory of \texttt{p} is
+\main\ function the value contained in the memory of \texttt{p} is
 still 2.
 
 \paragraph{Arrays and Pointers}
@@ -510,7 +467,7 @@ A C program can either receive command line input at execution time or
 by reading input from a file or other data source.  This example
 demonstrates how command line arguments are passed into a C program
 when the program is executed.  The design of the program is given as a
-\flo in figure~\ref{figure:flowchart_ex4} and as \psc in
+\flo\ in figure~\ref{figure:flowchart_ex4} and as \psc\ in
 \psc~\ref{pseudo:ex4}. 
 
 \begin{figure}[h]
@@ -524,7 +481,7 @@ when the program is executed.  The design of the program is given as a
 \begin{pseudocode}[h]
 \begin{verbatim}
 main(command line arguments)
-  Print the number of commmand line arguments
+  Print the number of command line arguments
   Loop over the command line inputs
     Print each command line input
 \end{verbatim}
@@ -750,9 +707,9 @@ which links the object files together to make the executable.
 
 When any of the \texttt{.c} files referred to in the \texttt{Makefile}
 are present but are newer than the \texttt{.o} file of the prefix
-name, \texttt{Make} just rebuilds the files concerned and
+name, \texttt{make} just rebuilds the files concerned and
 completes the link step.  When any of the \texttt{\$(OBJECTS)} are
-newer than \texttt{file\_io.exe}, \texttt{Make} just completes the
+newer than \texttt{file\_io.exe}, \texttt{make} just completes the
 link step.  This can be tested out by using \texttt{touch}
 \begin{verbatim}
 ]$ make
@@ -761,7 +718,7 @@ link step.  This can be tested out by using \texttt{touch}
 ]$ touch file_io.o
 ]$ make
 \end{verbatim} %$
-More examples of \texttt{Make} syntax are given in later examples.
+More examples of \texttt{make} syntax are given in later examples.
 
 \lstset{language=C}
 

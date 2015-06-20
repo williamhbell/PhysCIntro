@@ -30,7 +30,7 @@ int main() {
   for(i=0;i<4;i++) {
     /* Print the element number, value in the element and the address
     ** of the element. */
-    printf("v[%d]=%d\t &v[%d]=%x\n",i,*pv,i,pv);
+    printf("v[%d]=%d\t &v[%d]=%p\n",i,*pv,i,pv);
    
     /* Increment the pointer to point at the next address */
     pv++;

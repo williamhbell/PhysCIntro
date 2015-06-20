@@ -1,5 +1,6 @@
 % Document history:
 %  1.0 - Original version by W. H. Bell
+%  1.1 - Updated text
 %
 \documentclass[11pt]{scrartcl}
 \usepackage{graphicx}
@@ -28,13 +29,14 @@
 % Problems with this function:
 %    1. Breaks headings as they loose the \noindent
 \newcommand{\funbox}[1]{\vbox{\vspace{0.2cm}\fbox{\large\texttt{#1}}\vspace{0.2cm}}}
-\def\cpp{C$++\;$}
-\def\main{\texttt{main()}$\;$}
-\def\intmain{\texttt{int main()}$\;$}
-\def\void{\texttt{void}$\;$}
-\def\psc{Pseudocode$\;$}
-\def\flo{Flowchart$\;$}
-\def\fortran{FORTRAN$\;$}
+\def\cpp{C$++$}
+\def\main{\texttt{main()}}
+\def\intmain{\texttt{int main()}}
+\def\void{\texttt{void}}
+\def\psc{Pseudocode}
+\def\flo{Flowchart}
+\def\fortran{FORTRAN}
+\def\linux{Linux}
 
 \floatstyle{plain}
 \newfloat{program}{thp}{lop}
@@ -45,19 +47,17 @@
 \floatname{pseudocode}{Pseudocode}
 
 \begin{document}
-\title{C Programming for Physicists}
+\title{C programming for physicists}
 \author{W. H. Bell}
 \date{
-\copyright 2010
+\copyright 2015
 }
 
 \maketitle
 \hrule
 \vspace{0.2cm}
 \begin{abstract}
-The C programming language is introduced through a set of example programs.  Programs a.  New
-concepts will be introduced through Flowcharts, \psc and example
-C implementation.
+The C programming language is introduced through a set of worked examples.  An introduction to programming in the \linux\ environment is given, together with design tools such as flowcharts and \psc.  Following the initial discussion of programming concepts, the majority of the ANSI C syntax and build in commands are demonstrated.  The course concludes with a more complicated example of histogramming data from a particle physics simulation.
 \end{abstract}
 \vspace{0.2cm}
 \hrule
@@ -77,12 +77,12 @@ C implementation.
 \begin{enumerate}
 \item Learn to solve problems by implementing computer programming structures and designs suitable for use with any structured programming language.
 \item Cover core aspects of the C programming language.
-\item Introduce programming with a LINUX platform. 
+\item Introduce programming with a \linux\ platform. 
 \end{enumerate}
 
 \paragraph{Syllabus}
 \begin{itemize}
-  \item Problem Analysis Strategies
+  \item Problem analysis strategies
   \begin{itemize}
     \item Flowcharts
     \item \psc 
@@ -90,15 +90,15 @@ C implementation.
   \item ANSI C
   \begin{itemize}
     \item Basic syntax and variable types
-    \item Arrays, Pointers and Functions
+    \item Arrays, pointers and functions
     \item The C preprocessor
-    \item Input/Output Operations
-    \item Structures and Unions 
+    \item Input/Output operations
+    \item Structures and unions 
   \end{itemize}
-  \item Introduction to LINUX Programming
+  \item Introduction to programming on \linux
   \begin{itemize}
-    \item The GNU C Compiler (gcc)
-    \item Building executables with Make 
+    \item The GNU C Compiler (\texttt{gcc})
+    \item Building executables with \texttt{make} 
   \end{itemize}
 \end{itemize}
 
@@ -106,39 +106,24 @@ Material taught within the syllabus is intended to be supplemented by
 further reading. The recommended reference material for this course
 is:
 \begin{itemize}
-\item  "The C Programming Language", Brian W. Kernighan and Dennis M. Ritchie, Prentice-Hall, ISBN 0-13-110362-8
+\item ``The C Programming Language'', Brian W. Kernighan and Dennis M. Ritchie, Prentice-Hall, ISBN 0-13-110362-8
 \end{itemize}
 Further information on the GNU C compiler can be found at \cite{gcc}.
 
 \subsection{Motivation}
-
-Computers are highly useful for data acquisition, control, statistical
-analyses, building simulations, numerical methods, etc.  While many
-software packages have been written it is highly likely that during
-the course of research or in the working world in general, software
-will either need to be written or modified.  Those who are able to
-program are therefore in an excellent position to meet research or
-business goals.
+Computers can be used for data acquisition, control, statistical analyses, building simulations, numerical methods and other generalised complex systems.  While many software packages have been written, it is often necessary to write or modify software to facilitate research or meet a goal within the workplace.  Those who are able to program are therefore in an excellent position to attack complex problems.
 
 \subsection{Programming}
+There are a great many different computer programming languages.  Thankfully, once the general process of programming has been understood it does not take a great deal of effort to apply similar strategies to other languages.  The C programming language was chosen for this course for several reasons: (i) the basic syntax is the same as \cpp\ and JAVA, (ii) its structured layout is similar to other common languages, (iii) the language is simple and therefore easily understood, (iv) C is used in many modern applications.
 
-There are a great many different computer programming languages.
-Thankfully once the general process of programming has been understood
-it does not take a great deal of effort to apply it to any one of the
-common languages.  The C programming language was chosen for this
-course for several reasons: (i) the basic syntax is the same as \cpp
-and JAVA, (ii) the structured layout is similar to many common
-languages, (iii) the language is simple and therefore easily
-understood, (iv) C is used in many modern applications.
-
-\subsection{Writing Programs} 
+\subsection{Writing Programs} %HHH
 Before a program is written it is important to know what is actually
 needed.  For example a program that will be used for data acquisition
 must be tailored to the specific hardware that will be used and
 provide a user interface which contains all the needed functionality.
 Failure to properly understand the requirements of a program  
 may result in wasted time, redesigning or patching at a
-later stage.  Some complicated languages such as \cpp are particularly
+later stage.  Some complicated languages such as \cpp\ are particularly
 unforgiving in this respect.
 
 Once the requirements have been listed the overall aims needed from a
@@ -154,13 +139,13 @@ consuming to design every corner of a program with them.  Flowcharts
 should therefore be used either to describe the overall logic of a
 program or particularly difficult to understand section of a program.
 
-\psc is as the name suggests code which is not really code, but
-is instead a way of describing a program.  Writing \psc provides
+\psc\ is as the name suggests code which is not really code, but
+is instead a way of describing a program.  Writing \psc\ provides
 a quick way of breaking a problem down into component parts.  There is
 however no fixed standard and it is therefore probably best to find a
-way of writing \psc that feels comfortable to you.  \psc
+way of writing \psc\ that feels comfortable to you.  \psc\
 is more a design tool than a form of documentation although much of
-what is written in \psc will often end up as comments within a
+what is written in \psc\ will often end up as comments within a
 program.
 
 In summary the process of writing a program can be summarised in 4
@@ -168,21 +153,16 @@ steps: (i)~Requirements, (ii)~Design, (iii)~Implementation, and
 (iv)~Documentation.  When writing a program it is a good idea to have
 a log book and scrap paper handy to facilitate this process.
 
-\subsection{Programming with LINUX}
-Each example that will be discussed in this document can be downloaded
-from
+\subsection{Programming with Linux}
+The example programs that are discussed in this guide can be downloaded from:
 \begin{verbatim}
-http://ppewww.physics.gla.ac.uk/~wbell/3rd_year_c/
+http://www.whbell.net/resources/PhysCIntro/
 \end{verbatim}
-After downloading a set of examples to a LINUX machine they can be
-unpacked by using tar:
+Once the examples have been downloaded, they can be unpacked using the tar command:
 \begin{verbatim}
-]$ tar xvfz 3rd_year_c_lab1.tar.gz
+]$ tar PhysCIntroSource-2015-06-21.tar.gz
 \end{verbatim} %$
-where \texttt{$]\$$} refers to the Linux prompt and
-\texttt{3rd\_year\_c\_lab1.tar.gz} is a tar file of the first
-laboratory examples.  Within each example subdirectory there is a
-\texttt{README} file describing how to build and run the example.
+where \texttt{$]\$$} refers to the \linux\ prompt.  Each subdirectory contains source code and a \texttt{README.txt} file that describes how to build and run the associated example program.
 
 When developing C it can be very helpful to use an editor that colours
 text according to C syntax.  \texttt{xemacs} and \texttt{emacs} provide this
@@ -197,9 +177,9 @@ positioning according to the syntax used.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Beginning to Program with C}
+\section{Beginning to program with C}
 
-\subsection{A First Program}
+\subsection{A first program}
 
 Programming languages are commonly introduced by writing a program to
 print a string to the standard output.  The standard output is the
@@ -246,9 +226,9 @@ int main() {
 
 The execution of every program starts from a \main function.  From
 this function other functions can be called.  The return type of \main
-is given by the \texttt{int} prefix.  Within the LINUX/UNIX
+is given by the \texttt{int} prefix.  Within the \linux/UNIX
 environment the operating system expects a program to return an exit
-condition.  The value of the return statement from the \main function
+condition.  The value of the return statement from the \main\ function
 is collected by the operating system and is available to a user to
 query.  Following the execution of the program the return value can
 be queried by typing
@@ -257,7 +237,7 @@ be queried by typing
 \end{verbatim}
 where \texttt{$]\$$} is the LINUX prompt.
 
-The contents of the \main function are delimited by the brackets
+The contents of the \main\ function are delimited by the brackets
 \texttt{\{ \}}, which represent a compound statement.  Inside this
 compound statement there may be several statements each terminated by a
 `\texttt{;}' character, together with other compound statements.  In
@@ -285,14 +265,14 @@ Example 2 introduces functions, conditional statements and loops.
 The example reads from the standard input and performs several
 checks on integers and characters provided by the user.  (The standard
 input refers to something typed into a terminal by either the keyboard
-or by redirection.)  A \flo describing the \main function is
-given in figure~\ref{figure:flowchart_ex2}.  A \psc
+or by redirection.)  A \flo\ describing the \main\ function is
+given in figure~\ref{figure:flowchart_ex2}.  A \psc\
 implementation of this program is given in \psc~\ref{pseudo:ex2}.
 
 \begin{figure}[h]
 \begin{center}
 \includegraphics[height=11cm]{figures/ex2}
-\caption{A flowchart describing the \main function of example 2
+\caption{A flowchart describing the \main\ function of example 2
 \label{figure:flowchart_ex2}}
 \end{center}
 \end{figure}
@@ -551,7 +531,7 @@ main(command line arguments)
 \caption{Example 4 in pseudocode \label{pseudo:ex4}}
 \end{pseudocode}
 
-When programing C on a LINUX platform the \main function is normally
+When programming C on a \linux\ platform the \main\ function is normally
 implemented in one of two ways:
 \begin{lstlisting}
 int main(void)
@@ -579,16 +559,14 @@ The logic of this can be tested out using example 4 by typing
 A simple test on the value of \texttt{argv[0]} could then be used to
 do something else.
 
-\subsection{File Access}
+\subsection{File access}
 Most programs will need to save or read data from disk or another
 input/output device.  Example 5 demonstrates how some simple data can
-be written to and read from an ASCII file.  The design of the \main is
-given in figure~\ref{figure:flowchart_ex5} and the complete program is
-described in \psc~\ref{pseudo:ex5_main}~and~\ref{pseudo:ex5_fileio}.
+be written to and read from an ASCII file.  The design of the \main\ is given in figure~\ref{figure:flowchart_ex5} and the complete program is described in \psc~\ref{pseudo:ex5_main}~and~\ref{pseudo:ex5_fileio}.
 \begin{figure}[h]
 \begin{center}
 \includegraphics[height=7cm]{figures/ex5}
-\caption{A flowchart describing the \main function of example 5
+\caption{A flowchart describing the \main\ function of example 5
 \label{figure:flowchart_ex5}}
 \end{center}
 \end{figure}
@@ -605,14 +583,14 @@ main(command line arguments)
   ELSE IF the input flag is read, read the specified file.
   ELSE report an error
 \end{verbatim}
-\caption{The \main function of example 5 in pseudocode \label{pseudo:ex5_main}}
+\caption{The \main\ function of example 5 in pseudocode \label{pseudo:ex5_main}}
 \end{pseudocode}
 
 \begin{pseudocode}[h]
 \begin{verbatim}
 file_write(file name)
   Open an output file.
-  IF the file was successfully openned
+  IF the file was successfully opened
     LOOP from 1 to 20
       Print the value into the file.
       IF the value is a multiple of 5 then print a newline.
@@ -643,7 +621,7 @@ either \texttt{file\_write} or \texttt{file\_read} is called.  The
 functions \texttt{file\_write} and \texttt{file\_read} are
 pre-declared in the header file \texttt{file\_io.h} and implemented in
 \texttt{file\_io.c}.  When this code is compiled the resultant machine
-code \texttt{main.o} contains un-defined references to these
+code \texttt{main.o} contains undefined references to these
 functions.  Then at link time the machine code in \texttt{file\_io.o}
 and \texttt{main.o} is linked together to produce the final
 executable.  The practical process of building this executable is
@@ -653,7 +631,7 @@ discussed in section~\ref{section:make}.
 \newpage
 
 The \texttt{file\_io.h} header file of example 5 contains three pieces
-of precompiler syntax which surround the function pre-declarations.
+of precompiler syntax which surround the function predeclarations.
 \begin{lstlisting}
 #ifndef FILE_IO_H
 #define FILE_IO_H
@@ -798,27 +776,22 @@ an input to another application.  The program
 \texttt{problem/generator/generator.c} writes random numbers into a
 \texttt{sample.txt} file.  Follow the instructions in
 \texttt{generator/README} file to produce a \texttt{sample.txt}.  Then write a
-program to convert \texttt{sample.txt} into a Commar Separated Values
-file (CSV)\cite{csv} suitable for use as input to a spreadsheet.  Run
-your program and read the resultant output into a spreadsheet and plot
-the Value column as a histogram.
+program to convert \texttt{sample.txt} into a Comma Separated Values file (CSV)\cite{csv} suitable for use as input to a spreadsheet.  Run your program and read the resultant output into a spreadsheet and plot the Value column as a histogram.
 
-Start by drawing a simple \flo outline of the program.  Then write the
-program in \psc.  Finally write your program in C using code from each
-of this section's examples as necessary.  Remember to add comments.
+Start by drawing a simple \flo\ outline of the program.  Then write the program in \psc.  Finally write your program in C using code from each of this section's examples as necessary.  Remember to add comments.
 
 \clearpage
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Data Structures and Linking with FORTRAN}
+\section{Data structures}
 In this section more complex data structures \texttt{struct} and \texttt{union} will
 be discussed.  An example of how to interface to FORTRAN77 code will
 be given and the section finishes with a complicated example including
 much of the syntax introduced so far.
 
-\subsection{Pointers and Structs}
+\subsection{Pointers and structs}
 
 The purpose of example 6 program is to demonstrate \texttt{struct} syntax
 and to show how arrays and \texttt{struct}s can be passed into a
@@ -875,7 +848,7 @@ the data members can have different lengths.  The total memory used by a
 used for the data members.  The order of the \texttt{struct} members in
 the \texttt{struct} definition determines the order of their allocation in
 memory.  The member types can include other \texttt{struct}s,
-\texttt{union}s, arrays and basic variables etc.
+\texttt{union}s, arrays and basic variables etc..
 
 After the \texttt{struct}s, basic variables and the array have all been
 initialised the function \texttt{fun()} is called.  This function is
@@ -921,24 +894,23 @@ dat_ptr->i=5; dat_ptr->array[0]=6; dat_ptr->array[1]=7;
 then the change is still present when the execution returns to the
 \main.
 
-\subsection{Binary I/O and Unions}
+\subsection{Binary I/O and unions}
 In example 7 the data concerning several fundamental particles are
 written in binary form into an output file.  Then the program reads
-these data back and prints out the 7th particle data record.  The
-design of the program is given in \psc~\ref{pseudo:ex7}.
+these data back and prints out the 7$^\mathrm{th}$ particle data record.  The design of the program is given in \psc~\ref{pseudo:ex7}.
 
 \begin{pseudocode}[h]
 \begin{verbatim}
 main()
   Print the size of one union entry.
   Print the size of each union member.
-  Write 10 records of fundemental particles to a binary file.
+  Write 10 records of fundamental particles to a binary file.
   Read the 7th record back from the binary file.
   Print the values of the 7th record.
 
 status write_records()
   Create an array of 12 records.
-  Initialise the array of records with fundemental particle data.
+  Initialise the array of records with fundamental particle data.
   Open a file for writing.
   Write each record element out in binary form.
   Close the file.
@@ -952,7 +924,7 @@ status find_record()
 \caption{Example 7 in pseudocode \label{pseudo:ex7}}
 \end{pseudocode}
 
-At the beginning of the \main a \texttt{record} \texttt{dat} is
+At the beginning of the \main\ a \texttt{record} \texttt{dat} is
 instantiated.
 \begin{lstlisting}
 record dat;
@@ -999,11 +971,7 @@ code.  It is therefore much more common that the \texttt{typedef} form
 of a \texttt{struct} or \texttt{union} definition is used.
 
 A \texttt{union} contains a set of members which are listed within the
-\texttt{\{\}} brackets.  The members of a \texttt{union} share the same memory
-allocation.  The size of the \texttt{union} is therefore set by the
-largest member.  This can easily be demonstrated by running example
-7.  The syntax for accessing the members of a \texttt{union} is the same as
-the syntax used for accessing the members of a \texttt{struct}.
+\texttt{\{\}} brackets.  The members of a \texttt{union} share the same memory allocation.  The size of the \texttt{union} is therefore set by the largest member.  This can easily be demonstrated by running example 7.  The syntax for accessing the members of a \texttt{union} is the same as the syntax used for accessing the members of a \texttt{struct}.
 
 In this example an array of the \texttt{entry} \texttt{union} is
 created with 4 elements, this is a \texttt{record}.  The
@@ -1016,10 +984,10 @@ set of \texttt{\#define} statements are used instead of the indices.
 #define RECORD_NAME 2
 #define RECORD_CHARGE 3
 \end{lstlisting}
-When the code compiles the pre-compiler replaces each
+When the code compiles the precompiler replaces each
 definition with its value.  Then the compiler turns the result into
 machine code.  It is a common convention that \texttt{\#define}
-statements use all uppercase letters to avoid confusion with real
+statements use all upper case letters to avoid confusion with real
 variables.  What follows the \texttt{\#define~NAME} does not have to
 be a simple number, the precompiler just does a find and replace.
 
@@ -1055,8 +1023,7 @@ fprintf(stderr," Error: unable to open \'%s\' for writing.\n", particle_file);
 \end{lstlisting}
 The standard error is printed to the console or shell window in the
 same manner as the standard output but is contained in a different
-stream.  When running a program on LINUX the standard
-output an be redirected to a file.
+stream.  When running a program on \linux\ the standard output an be redirected to a file.
 \begin{verbatim}
 ]$ ./prog.exe > output
 \end{verbatim} %$
@@ -1064,19 +1031,13 @@ This does not redirect the standard error though, which can be left
 for the user to read.\footnote{It is possible to redirect both
 standard error and standard output to one file.}
 
-Once the file has been opened the \texttt{particle\_data} records are
-written to it in binary form.
+Once the file has been opened the \texttt{particle\_data} records are written to it in binary form.
 \begin{lstlisting}
 fwrite(&particle_data[i][j], 16, 1, file_ptr);
 \end{lstlisting}
 The arguments of \texttt{fwrite} are the address of one \texttt{union}
 instantiation, the size of the \texttt{union}, the number of
-\texttt{union} instantiations to
-be written and the {\em file pointer} to which the data should be
-written.  Since the size of the \texttt{union} is set by the largest member
-each data element is the same size.  This means that the code to write
-out these data is very simple and only requires two loops over the 
-\texttt{fwrite} statement.  
+\texttt{union} instantiations to be written and the {\em file pointer} to which the data should be written.  Since the size of the \texttt{union} is set by the largest member each data element is the same size.  This means that the code to write out these data is very simple and only requires two loops over the \texttt{fwrite} statement.  
 
 After the data have been written to disk \texttt{find\_record} is
 called to find and read the 7th record.  \texttt{find\_record} opens
@@ -1085,18 +1046,15 @@ example 5.
 \begin{lstlisting}
 file_ptr = fopen(particle_file,"r"); 
 \end{lstlisting}
-Then after checking the file was opened successfully it fast forwards
-to the correct position in the file
+Then after checking the file was opened successfully it fast forwards to the correct position in the file
 \begin{lstlisting}
 if(fseek(file_ptr, (long)(sizeof(*dat)*offset), 0) != 0)
 \end{lstlisting}
-where \texttt{fseek} returns a non-zero value if the seek fails.  This
-then leaves the file-position indicator set to point at the value
-given by the offset.  The record is then read by calling \texttt{fread}.
+where \texttt{fseek} returns a non-zero value if the seek fails.  This then leaves the file-position indicator set to point at the value given by the offset.  The record is then read by calling \texttt{fread}.
 \begin{lstlisting}
 fread(dat, sizeof(*dat), 1, file_ptr);
 \end{lstlisting}
-Finally in the \main these data are printed to the standard out
+Finally in the \main\ these data are printed to the standard out
 \begin{lstlisting}
 printf("\t Id \t Mass    \t Name          \t Charge \n");
 printf("\t %d \t %3.3e \t %-12s \t %d \n", 
@@ -1111,18 +1069,12 @@ non-zero value being returned to the operating system.  When writing
 a program it is important to make sure the implementation is able to
 prevent crashes by handling error conditions properly.  This means
 that the program should exit in a controlled manner and provide the
-user with a description of the error, rather than a cryptic message or
-nasty crash.
+user with a description of the error, rather than a cryptic message or nasty crash.
 
 \subsection{Linking with FORTRAN77}
 
 Although many modern programs have been written in C it is sometimes
-very useful to be able to link C code to another programming language.
-When the code to be linked to is compiled into machine code this can
-be achieved by knowing how the two compilers concerned work.  For
-example, FORTRAN77 a programming language often used for physics and
-engineering applications, can be compiled by \texttt{g77} into object files.
-These object files can be browsed with \texttt{nm}.  
+very useful to be able to link C code to another programming language.  When the code to be linked to is compiled into machine code this can be achieved by knowing how the two compilers concerned work.  For example, FORTRAN77 a programming language often used for physics and engineering applications, can be compiled by \texttt{g77} into object files.  These object files can be browsed with \texttt{nm}.  
 \begin{verbatim}
 ]$ g77 -c fortran.for
 ]$ nm -g fortran.o 
@@ -1274,7 +1226,7 @@ float call_back__(float *,char *, int);
 The last variable in the C version of this function is the length of
 the string, which is implicitly present in the FORTRAN code.  
 
-\subsection{Sine Wave Generator}
+\subsection{Sine wave generator}
 As programs become larger the initial design becomes more important.
 Therefore to encourage thought about program structure the example
 programs given in this course will become more and
@@ -1472,7 +1424,7 @@ string in front of the gnuplot command
 \begin{lstlisting}
 sprintf(syscommand, "echo \"%s\" | gnuplot -persist", gnucommand);
 \end{lstlisting}
-and uses a system call to execute the command in a LINUX shell.
+and uses a system call to execute the command in a \linux\ shell.
 \begin{lstlisting}
 system(syscommand);
 \end{lstlisting}
@@ -1484,7 +1436,7 @@ run after the C program has exited.
 
 \subsection{Problem}
 Programs are often written to interface with hardware, for slow control or 
-data acquisition.  Since the LINUX lab does not contain any external 
+data acquisition.  Since the \linux\ lab does not contain any external 
 hardware this problem concerns monitoring the computer itself.
 
 A program is provided which requests more and more memory by calling
@@ -1549,12 +1501,12 @@ in the in the manual page by typing
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Simple Analyses}
+\section{Simple analyses}
 During previous sections much of the C programming language has been
 introduced.  This section is therefore dedicated to solving more
 complicated problems.
 
-\subsection{Histogramming Data}
+\subsection{Histogramming data}
 
 When processing large volumes of data it is often very useful to
 accumulate data values in histograms.  Histograms provide an important
@@ -1816,15 +1768,15 @@ included in the link step by simply adding \texttt{-lm} to the link line.
 In \texttt{lab3/problem/generator} is a program to produce B meson pairs
 using the PYTHIA\cite{pythia} event generator.  The program should be
 compiled and run as specified in the \texttt{README} file to generate
-at least 5000 events.  (On the LINUX cluster the data file has already
+at least 5000 events.  (On the \linux\ cluster the data file has already
 been made.  Please use this data file rather than re-run the generator
 program.)
 
 Write a program to read the \texttt{HEPEVT} event records from the
 binary file\\ \texttt{data/pptobbar\_hepevt.dat}.  Histogram the
-transverse momentum ($p_T$) of the B mesons and their proper lifetime
-$\tau_{true}$ as the length $c\tau_{true}$.  Calculate the mean value
-of $c\tau_{true}$ for the data sample and compare this with
+transverse momentum ($p_\mathrm{T}$) of the B mesons and their proper lifetime
+$\tau_\mathrm{true}$ as the length $c\tau_\mathrm{true}$.  Calculate the mean value
+of $c\tau_\mathrm{true}$ for the data sample and compare this with
 the PDG\cite{pdg} world averages given in table~\ref{table:lifetimes}.
 
 \begin{table}[h!!]
@@ -1841,7 +1793,7 @@ $c\tau_{true}$, taken from the PDG.
 \label{table:lifetimes}}  
 \end{table}
 
-Start by writing down a \psc implementation.  Then implement a
+Start by writing down a \psc\ implementation.  Then implement a
 solution.  Remember to comment your code.  Marks will be given for
 pseudocode and implementation.
 
@@ -1857,14 +1809,14 @@ the primary vertex can be calculated from
 where $v_x$ and $v_y$ are the $x$ and $y$ components of the
 vertex position respectively.
 
-The true lifetime $\tau_{true}$ is related to the displacement of the
+The true lifetime $\tau_\mathrm{true}$ is related to the displacement of the
 secondary vertex, as stated in equation~\ref{equation:propertime}.
 \begin{equation}
-c\tau_{true} = L_{xy}^B \frac{m_B}{p_T^B},
+c\tau_\mathrm{true} = L_\mathrm{xy}^\mathrm{B} \frac{m_\mathrm{B}}{p_\mathrm{T}^B},
 \label{equation:propertime}
 \end{equation}
-where $m_B$ is the mass of the B meson, $p_T^B$ is the transverse
-momentum of the B meson and $L_{xy}^B$, is the displacement of the
+where $m_\mathrm{B}$ is the mass of the B meson, $p_\mathrm{T}^\mathrm{B}$ is the transverse
+momentum of the B meson and $L_\mathrm{xy}^\mathrm{B}$, is the displacement of the
 secondary vertex from the primary vertex within the transverse plane.
 
 \subsubsection*{Hints}

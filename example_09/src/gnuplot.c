@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 /* 
 ** A function to provide a command interface with gnuplot

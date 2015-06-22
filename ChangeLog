@@ -1,3 +1,7 @@
+2015-09-21 W. H. Bell <whbqcd1@gmail.com>
+	* Fixing compile-time errors and swapping to gfortran
+	* Updating documentation
+
 2010-07-24 W. H. Bell <W.Bell@cern.ch>
 	* Updating the documentation ready for the web.
 	* Tagging as PhysCIntro-00-00-01

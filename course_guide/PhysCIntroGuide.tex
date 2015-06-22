@@ -1,6 +1,6 @@
 % Document history:
 %  1.0 - Original version by W. H. Bell
-%  1.1 - Updated text
+%  1.1 - Updated text, with bug fixes
 %
 \documentclass[11pt]{scrartcl}
 \usepackage{graphicx}
@@ -36,6 +36,7 @@
 \def\psc{Pseudocode}
 \def\flo{Flowchart}
 \def\fortran{FORTRAN}
+\def\java{Java}
 \def\linux{Linux}
 
 \floatstyle{plain}
@@ -57,7 +58,7 @@
 \hrule
 \vspace{0.2cm}
 \begin{abstract}
-The C programming language is introduced through a set of worked examples.  An introduction to programming in the \linux\ environment is given, together with design tools such as flowcharts and \psc.  Following the initial discussion of programming concepts, the majority of the ANSI C syntax and build in commands are demonstrated.  The course concludes with a more complicated example of histogramming data from a particle physics simulation.
+The C programming language is introduced through a set of worked examples.  \linux\ tools for editing, compilation and linking programs are introduced.  Program design is discusses using flowcharts and \psc.  Following the initial discussion of programming concepts, the majority of the ANSI C syntax and built in commands are demonstrated.  The course concludes with a more complicated example of histogramming data from a particle physics simulation.
 \end{abstract}
 \vspace{0.2cm}
 \hrule
@@ -75,7 +76,7 @@ The C programming language is introduced through a set of worked examples.  An i
 \section{Introduction}
 \paragraph{Aims}
 \begin{enumerate}
-\item Learn to solve problems by implementing computer programming structures and designs suitable for use with any structured programming language.
+\item Learn to solve problems by implementing computer programming structures and designs suitable for use with other structured programming languages.
 \item Cover core aspects of the C programming language.
 \item Introduce programming with a \linux\ platform. 
 \end{enumerate}
@@ -102,56 +103,29 @@ The C programming language is introduced through a set of worked examples.  An i
   \end{itemize}
 \end{itemize}
 
-Material taught within the syllabus is intended to be supplemented by
-further reading. The recommended reference material for this course
-is:
+Material taught within the syllabus is intended to be supplemented by further reading. The recommended reference material for this course is:
 \begin{itemize}
 \item ``The C Programming Language'', Brian W. Kernighan and Dennis M. Ritchie, Prentice-Hall, ISBN 0-13-110362-8
 \end{itemize}
 Further information on the GNU C compiler can be found at \cite{gcc}.
 
 \subsection{Motivation}
-Computers can be used for data acquisition, control, statistical analyses, building simulations, numerical methods and other generalised complex systems.  While many software packages have been written, it is often necessary to write or modify software to facilitate research or meet a goal within the workplace.  Those who are able to program are therefore in an excellent position to attack complex problems.
+Computers can be used for data acquisition, control, statistical analyses, building simulations, numerical methods and other complex systems.  While many software packages have been written, it is often necessary to write or modify software to facilitate research or to meet a goal within the workplace.  Those who are able to program are therefore in an excellent position to attack complex problems.
 
 \subsection{Programming}
-There are a great many different computer programming languages.  Thankfully, once the general process of programming has been understood it does not take a great deal of effort to apply similar strategies to other languages.  The C programming language was chosen for this course for several reasons: (i) the basic syntax is the same as \cpp\ and JAVA, (ii) its structured layout is similar to other common languages, (iii) the language is simple and therefore easily understood, (iv) C is used in many modern applications.
+There are a great many different computer programming languages.  Thankfully, once the general process of programming has been understood it does not take a great deal of effort to apply similar strategies to other languages.  The C programming language was chosen for this course for several reasons: (i) the basic syntax is the same as \cpp\ and \java, (ii) its structured layout is similar to other common languages, (iii) the language is simple and therefore easily understood, and (iv) C is used in many modern applications.
 
-\subsection{Writing Programs} %HHH
-Before a program is written it is important to know what is actually
-needed.  For example a program that will be used for data acquisition
-must be tailored to the specific hardware that will be used and
-provide a user interface which contains all the needed functionality.
-Failure to properly understand the requirements of a program  
-may result in wasted time, redesigning or patching at a
-later stage.  Some complicated languages such as \cpp\ are particularly
-unforgiving in this respect.
+\subsection{Writing programs}
+Before writing a program, it is important to know exactly what is required of a program.  A lot of time can be saved by thinking clearly about the internal structure of the software before any source code is written.  For example, a program that will be used for data acquisition should be tailored to the specific hardware that will be used and provide a user interface that contains functionality that the user expects.  Failure to properly understand the requirements of a program may result in wasted time and redesigning or patching at a later stage.  Some complicated languages such as \cpp\ can be particularly unforgiving in this respect.
 
-Once the requirements have been listed the overall aims needed from a
-program can be broken down into a series of pieces which can be easily
-converted into a computer language.  During this course
-\psc~\cite{pseudocodewiki} and Flowcharts~\cite{flowchartwiki}
-will be used to assist with programming design.
+Once the requirements of a program have been described, they need to be broken down into a series of steps that can be converted into a computer programming language.  In this document,\psc~\cite{pseudocodewiki} and Flowcharts~\cite{flowchartwiki} are used to illustrate the design process.
 
-Flowcharts provide a high level design tool which can also be used as
-a form of documentation.  They promote a logical thought process by
-following a set of construction rules.  It is however very time
-consuming to design every corner of a program with them.  Flowcharts
-should therefore be used either to describe the overall logic of a
-program or particularly difficult to understand section of a program.
+Flowcharts are a high-level design tool that can also be used as a form of documentation for other developers.  Describing a program with a flowchart promotes a logical thought process.  However, documenting the fine details of a program using Flowcharts would be prohibitively time consuming.  Therefore, Flowcharts should be used either to describe the overall logic of a distinct block of a program or particularly difficult to understand section of a program.
 
-\psc\ is as the name suggests code which is not really code, but
-is instead a way of describing a program.  Writing \psc\ provides
-a quick way of breaking a problem down into component parts.  There is
-however no fixed standard and it is therefore probably best to find a
-way of writing \psc\ that feels comfortable to you.  \psc\
-is more a design tool than a form of documentation although much of
-what is written in \psc\ will often end up as comments within a
-program.
+\psc\ is a quick way of describing a program, without writing the program in a structured programming language.  \psc\ can be used to describe the internal structure of functions or think through the inner workings of complex algorithms.  There is no fixed standard for \psc.  Therefore probably best to find a
+way of writing \psc\ that feels comfortable and is consistent across a programming project.  \psc\ is more useful as a design tool, rather than as a form of documentation.  However, \psc\ may  often be present as comments within a structured program.
 
-In summary the process of writing a program can be summarised in 4
-steps: (i)~Requirements, (ii)~Design, (iii)~Implementation, and 
-(iv)~Documentation.  When writing a program it is a good idea to have
-a log book and scrap paper handy to facilitate this process.
+In summary, the process of writing a program can be broken down into four steps: (i)~describing the requirements of a program, (ii)~designing large functional blocks, (iii)~implementation of in a computer programming language, and (iv)~documentation of the final program.  Throughout this process it can be useful to have a log book or electronic note pad to document the development stages.
 
 \subsection{Programming with Linux}
 The example programs that are discussed in this guide can be downloaded from:
@@ -160,20 +134,11 @@ http://www.whbell.net/resources/PhysCIntro/
 \end{verbatim}
 Once the examples have been downloaded, they can be unpacked using the tar command:
 \begin{verbatim}
-]$ tar PhysCIntroSource-2015-06-21.tar.gz
+]$ tar PhysCIntroSource-2015-06-22.tar.gz
 \end{verbatim} %$
-where \texttt{$]\$$} refers to the \linux\ prompt.  Each subdirectory contains source code and a \texttt{README.txt} file that describes how to build and run the associated example program.
+where \texttt{$]\$$} refers to the \linux\ prompt.  Each subdirectory contains source code and a \texttt{README.txt} text file that describes how to build and run the associated example program.
 
-When developing C it can be very helpful to use an editor that colours
-text according to C syntax.  \texttt{xemacs} and \texttt{emacs} provide this
-functionality.  Syntax highlighting in \texttt{xemacs} can be enabled by
-clicking on \texttt{Options$\rightarrow$Syntax~Highlighting} at the
-top of the editor window, and selecting \texttt{In~This~Buffer},
-\texttt{Automatic}, \texttt{Force~Rehighlight~in~this~Buffer},
-\texttt{Fonts} and \texttt{Colors}.  \texttt{xemacs} and
-\texttt{emacs} also provide 
-many other helpful features such as parenthesise checking and tab stops
-positioning according to the syntax used.
+Developing structure programming languages, such as C, is easier when sections of the source code are highlighted using different colours or fonts.  This functionality is present within several different editors such as \texttt{emacs} and is commonly referred to as syntax highlighting or fontification.  These editors often provide other features, such as parenthesise checking and variable width tab stops.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -181,9 +146,9 @@ positioning according to the syntax used.
 
 \subsection{A first program}
 
-Programming languages are commonly introduced by writing a program to
-print a string to the standard output.  The standard output is the
-terminal window or screen.  Therefore information printed to the
+Programming languages are commonly introduced by writing a program to print a string to the standard output.
+%%%HHH
+The standard output is the terminal window or screen.  Therefore information printed to the
 standard output will appear on the terminal window or screen.  Before
 looking at the example program let us look at its design.
 Figure~\ref{figure:flowchart_ex1} illustrates example 1 in \flo\
@@ -245,7 +210,7 @@ ignores any text surrounded by \texttt{/* */}.
 \clearpage
 \newpage
 
-\subsection{Loops, Conditional Statements and Functions}
+\subsection{Loops, conditional statements and functions}
 Example 2 introduces functions, conditional statements and loops.
 The example reads from the standard input and performs several
 checks on integers and characters provided by the user.  (The standard
@@ -305,7 +270,7 @@ It should be noted that while in this example the function pre-declarations are 
 comes afterwards, the example would work just as well with the
 implementation before the \main\ and no pre-declarations.  The use of pre-declarations at this point is a lead-in to the usage of header files which are later introduced in example 5.
 
-\paragraph{Conditional Statements}
+\paragraph{Conditional statements}
 Common ways of writing conditional statements involve either \texttt{if},~\texttt{if~else},~\texttt{else} or \texttt{switch} statements.  There are other ways of constructing conditional statements but these are not covered in this course.  Starting with \texttt{if},~\texttt{if~else},~\texttt{else} statements, examples of their syntax are given within the \texttt{numFingers} and \texttt{quitTime} functions of example 2.  Each \texttt{if} statement is evaluated such that when the contents of the logic associated with an \texttt{if} statement inside the \texttt{()} brackets is true, then the code within the following compound statement is executed.\texttt{if},~\texttt{if~else},~\texttt{else} statements operate
 sequentially, such that each piece of logic is tested in turn.  If all the logic tests fail then the statement following \texttt{else} is executed.
 
@@ -331,7 +296,7 @@ the boolean evaluated within the \texttt{while(~);} is true.  This
 remains true until the function \texttt{quitTime} returns a true.  The
 \texttt{while} loop tests on NOT \texttt{quitTime} return value.
 
-\subsection{Pointers and Arrays \label{section:pointersarrays}}
+\subsection{Pointers and arrays \label{section:pointersarrays}}
 
 Many languages use pointers implicitly such as \fortran\ and Java.  In
 C pointers are used explicitly.  This section introduces the concept
@@ -377,7 +342,7 @@ implementation of example 3 introduces pointers.  Looking at example 3
 there are two distinct parts to the program: the call to the function
 \texttt{fun} and the indexing of array \texttt{v[]}.
 
-\paragraph{Functions and Pointers}
+\paragraph{Functions and pointers}
 The function \texttt{fun} is declared as 
 \begin{lstlisting}
 void fun(int, int *);
@@ -415,7 +380,7 @@ function.  Then the memory address pointed to by the pointer
 \main\ function the value contained in the memory of \texttt{p} is
 still 2.
 
-\paragraph{Arrays and Pointers}
+\paragraph{Arrays and pointers}
 An array of type '\texttt{t}' is a series of memory blocks of size
 according to the type.  Each element of the array behaves as a
 separate variable of the given type of the array.  Array sizes are
@@ -462,7 +427,7 @@ causes it to point at the next element of the array.
 \end{center}
 \end{figure}
 
-\subsection{Command Line}
+\subsection{Command line}
 A C program can either receive command line input at execution time or
 by reading input from a file or other data source.  This example
 demonstrates how command line arguments are passed into a C program
@@ -1754,7 +1719,7 @@ Start by writing down a \psc\ implementation.  Then implement a
 solution.  Remember to comment your code.  Marks will be given for
 pseudocode and implementation.
 
-\subsubsection*{Background Information}
+\subsubsection*{Background information}
 The transverse momentum $p_T$ is defined as
 \[p_T = \sqrt{p_x^2 + p_y^2} \]
 where $p_x$ and $p_y$ are the $x$ and $y$ components of the

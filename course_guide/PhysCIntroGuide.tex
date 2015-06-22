@@ -996,16 +996,16 @@ user with a description of the error, rather than a cryptic message or nasty cra
 \subsection{Linking with FORTRAN77}
 
 Although many modern programs have been written in C it is sometimes
-very useful to be able to link C code to another programming language.  When the code to be linked to is compiled into machine code this can be achieved by knowing how the two compilers concerned work.  For example, FORTRAN77 a programming language often used for physics and engineering applications, can be compiled by \texttt{g77} into object files.  These object files can be browsed with \texttt{nm}.  
+very useful to be able to link C code to another programming language.  When the code to be linked to is compiled into machine code this can be achieved by knowing how the two compilers concerned work.  For example, FORTRAN77 a programming language often used for physics and engineering applications, can be compiled by \texttt{gfortran} into object files.  These object files can be browsed with \texttt{nm}.  
 \begin{verbatim}
-]$ g77 -c fortran.for
+]$ gfortran -c fortran.for
 ]$ nm -g fortran.o 
-00000251 T call_back__
+00000251 T call_back_
 00000000 T commons_
          U do_lio
          U e_wsle
 00000062 C forcom_
-         U mult_a__
+         U mult_a_
          U s_wsle
 \end{verbatim}
 C code is also compiled into object files, which can also be browsed
@@ -1013,23 +1013,22 @@ with \texttt{nm}.
 \begin{verbatim}
 ]$ gcc -c main.c 
 ]$ nm -g main.o
-         U call_back__
+         U call_back_
          U commons_
 00000065 T fill_common
          U forcom_
 00000000 T main
-000000ed T mult_a__
+000000ed T mult_a_
          U sprintf
 \end{verbatim}
 All that is needed to join FORTRAN77 with C is for the undefined
 references in FORTRAN77 or C to be present in the object files
 generated from the other language.  In this example
-\texttt{call\_back\_\_}, \texttt{commons\_}, \texttt{forcom\_} and
-\texttt{mult\_a\_\_} are linked between the two languages.  The other
+\texttt{call\_back\_}, \texttt{commons\_}, \texttt{forcom\_} and
+\texttt{mult\_a\_} are linked between the two languages.  The other
 undefined symbols can be found in the system libraries.  When
-\texttt{g77} compiles the FORTRAN code it uses a lower case version of
-the name and appends one underscore to  the end of the name or two
-underscores if the name already contains an underscore.\footnote{This
+\texttt{gfortran} compiles the FORTRAN code it uses a lower case version of
+the name and appends one underscore to  the end of the name.\footnote{This
 behaviour can be controlled by using compiler options.}
 
 Example 8 demonstrates all of the features of linking C and FORTRAN77
@@ -1047,7 +1046,7 @@ fill_common()
     sequential numbers.
   Fill the FORTRAN string with a C string.
 
-mult_a__()
+mult_a_()
   Multiply the input value by 10 and return it.
 
 SUBROUTINE COMMONS
@@ -1070,7 +1069,7 @@ strings but unlike C '\texttt{$\backslash$0}' is not used.  The
 maximum length of a string in FORTRAN is therefore set by the number
 of elements in the character array.  FORTRAN keeps track of the length
 of a string by implicitly passing its length with the string.  When
-FORTRAN is compiled with g77 these implicit variables become explicit
+FORTRAN is compiled with gfortran these implicit variables become explicit
 in the machine code output.  Therefore when calling a FORTRAN function
 from C, the lengths of each of the strings must follow each of the
 character arrays:
@@ -1143,7 +1142,7 @@ CHARACTER*(*) NAME
 \lstset{language=C}
 is therefore equivalent to
 \begin{lstlisting}
-float call_back__(float *,char *, int);
+float call_back_(float *,char *, int);
 \end{lstlisting}
 The last variable in the C version of this function is the length of
 the string, which is implicitly present in the FORTRAN code.  

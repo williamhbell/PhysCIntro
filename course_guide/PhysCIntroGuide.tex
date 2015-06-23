@@ -146,20 +146,15 @@ Developing structure programming languages, such as C, is easier when sections o
 
 \subsection{A first program}
 
-Programming languages are commonly introduced by writing a program to print a string to the standard output.
-%%%HHH
-The standard output is the terminal window or screen.  Therefore information printed to the
-standard output will appear on the terminal window or screen.  Before
-looking at the example program let us look at its design.
-Figure~\ref{figure:flowchart_ex1} illustrates example 1 in \flo\
-form, \psc~\ref{pseudo:ex1} describes the program using
-\psc\ and the C implementation of example 1 is given in
-Listing~\ref{listing:ex1}.
+Programming languages are commonly introduced by writing a program to print a string to the standard output.  The standard output is normally displayed on the terminal window or screen.
+
+The design of the program is illustrated as a Flowchart in Figure~\ref{figure:flowchart_ex1} and described as \psc\ in \psc~\ref{pseudo:ex1}.  The Flowchart shows that the program starts, prints one string and stops.  The \psc\ implementation is a little bit closer to the final C program and includes the returning of a status code back to the operating system.  The C implementation of this program is given  
+in Listing~\ref{listing:ex1}.
 
 \begin{figure}[h]
 \begin{center}
 \includegraphics[height=3cm]{figures/ex1}
-\caption{A flowchart describing example 1
+\caption{A flowchart description of example 1
 \label{figure:flowchart_ex1}}
 \end{center}
 \end{figure}
@@ -170,7 +165,7 @@ main()
   Print a string
   Return 0 to the operating system
 \end{verbatim}
-\caption{Example 1 in pseudocode \label{pseudo:ex1}}
+\caption{A pseudocode description of example 1\label{pseudo:ex1}}
 \end{pseudocode}
 
 \begin{program}[H]
@@ -186,10 +181,10 @@ int main() {
   return 0;
 }
 \end{lstlisting}
-\caption{The C implementation of Example 1 \label{listing:ex1}}
+\caption{The C implementation of example 1 \label{listing:ex1}}
 \end{program}
 
-The execution of every program starts from a \main\ function.  From this function other functions can be called.  The return type of \main\ is given by the \texttt{int} prefix.  Within the \linux/UNIX environment the operating system expects a program to return an exit condition.  The value of the return statement from the \main\ function is collected by the operating system and is available to a user to query.  Following the execution of the program the return value can be queried by typing
+The execution of every C program starts from a \main\ function.  From this function other functions can be called.  The return type of \main\ is given by the \texttt{int} prefix.  Within the \linux/UNIX environment the operating system expects a program to return an exit value.  The value of the return statement from the \main\ function is collected by the operating system and is available for a user to query after the program has run.  Following the execution of the program, the return value can be queried by typing
 \begin{verbatim}
 ]$ echo $?
 \end{verbatim}
@@ -197,12 +192,8 @@ where \texttt{$]\$$} is the \linux\ prompt.
 
 The contents of the \main\ function are delimited by the brackets
 \texttt{\{ \}}, which represent a compound statement.  Inside this
-compound statement there may be several statements each terminated by a
-`\texttt{;}' character, together with other compound statements.  In this example the \main\ function only contains two statements: one to print a string to the standard output and one to return the exit value to the operating system.  The first of these statements prints a string to the screen by calling the standard output function \texttt{printf}.  This string is terminated by the end of line character \texttt{$\backslash$n}.  At the top of the example, the pre-declaration of the \texttt{printf} function is included by including the header file \texttt{stdio.h}.  When this program is compiled, the compiler reads the pre-declaration of \texttt{printf}
-from the header file and leaves a call in the machine code to be
-resolved at link time.  Above the \texttt{\#include} statement is a
-comment.  Comments in C can be entered using
-\texttt{/* */} to surround the comment area.\footnote{The use of
+compound statement there may be several statements, each terminated by a
+`\texttt{;}' character, together with other compound statements.  In this example, the \main\ function only contains two statements: one to print a string to the standard output and one to return the exit value to the operating system.  The first of these statements prints a string to the screen by calling the standard output function \texttt{printf}.  This string is terminated by the end of line character \texttt{$\backslash$n}.  At the top of the example, the pre-declaration of the \texttt{printf} function is included by including the header file \texttt{stdio.h}.  When this program is compiled, the compiler reads the pre-declaration of \texttt{printf} from the header file and leaves an unresolved function call in the machine code to be resolved at link time.  Above the \texttt{\#include} statement is a comment.  Comments in C can be entered using \texttt{/* */} to surround the comment area.\footnote{The use of
 \texttt{//} comments is a non-ANSI feature and is therefore not
 included in this course.}  When the compiler compiles the code it
 ignores any text surrounded by \texttt{/* */}.
@@ -211,18 +202,16 @@ ignores any text surrounded by \texttt{/* */}.
 \newpage
 
 \subsection{Loops, conditional statements and functions}
-Example 2 introduces functions, conditional statements and loops.
-The example reads from the standard input and performs several
-checks on integers and characters provided by the user.  (The standard
-input refers to something typed into a terminal by either the keyboard
-or by redirection.)  A \flo\ describing the \main\ function is
-given in figure~\ref{figure:flowchart_ex2}.  A \psc\
+Having written a first program, the next step is to introduce logic statements and other functions.  A program that introduces functions, conditional statements and loops is given in the \texttt{example_02} subdirectory.  This example reads from the standard input and performs several checks on integers and characters provided by the user.  (The standard
+input normally refers to something written to a terminal, either using the keyboard
+or by input file redirection.)  A \flo\ describing the \main\ function is
+given in Figure~\ref{figure:flowchart_ex2}.  A \psc\
 implementation of this program is given in \psc~\ref{pseudo:ex2}.
 
 \begin{figure}[h]
 \begin{center}
 \includegraphics[height=11cm]{figures/ex2}
-\caption{A flowchart describing the \main\ function of example 2
+\caption{A flowchart representation of the \main\ function of example 2
 \label{figure:flowchart_ex2}}
 \end{center}
 \end{figure}
@@ -250,65 +239,55 @@ quitTime()
   Collect a character from the stdin
   Compare this with y/Y and return 1 if its is time to quit
 \end{verbatim}
-\caption{Example 2 in pseudocode \label{pseudo:ex2}}
+\caption{A pseudocode representation of example 2 \label{pseudo:ex2}}
 \end{pseudocode}
 
 \paragraph{Functions}
-The syntax of loops, conditional statements and functions are
-demonstrated by example 2.  This example contains an \intmain\ function
-as before.  Within the \main\ three functions are called:
-\texttt{numFingers}, \texttt{pickColour}, and
-\texttt{quitTime}.  Each function is pre-declared before the \main\ function.  Each pre-declaration is a statement where the return type, and input parameter types must be given.  The \void\ type simply means that no input parameter or return value is expected.  All functions must be either predeclared or declared before they are used.  There are three pre-declaration statements before the \main\ function.
+Similar to the first program, example 2 contains an \intmain\ function.  Within this \main\ function three functions are called: \texttt{numFingers}, \texttt{pickColour}, and \texttt{quitTime}.  Each function is pre-declared before the \main\ function.  Each pre-declaration is a statement where the return type, and input parameter types must be given.  The \void\ type simply means that no input parameter or return value is expected.  All functions must be either predeclared or declared before they are used.  There are three pre-declaration statements before the \main\ function.
 \begin{lstlisting}
 void numFingers(void);
 void pickColour(void);
 bool quitTime(void);
 \end{lstlisting}
-The implementation of these functions is given after the \main\ function.  Following the same syntax as the \main\ function the implementation of each of these three functions has a return type, a series of input types, and a compound statement enclosing the function contents.  If any input parameters are present then their names must be given.  These input variables are introduced with the values passed into the function when the function is called.  If the implementation is not given in either the code to be compiled or libraries to be linked in a linker error will result.
+The implementation of these functions is given after the \main\ function.  Following the same syntax as the \main\ function, the implementation of each of these three functions has a return type, a series of input types, and a compound statement enclosing the function contents.  These three functions do not have any input parameters.  If input parameters are defined in the function definition, then their types must be given in the pre-declaration and their types and names must be given in the implementation.  If a function has been pre-declared, but has not been implemented then the program will fail to link.
 
-It should be noted that while in this example the function pre-declarations are given before the \main\ and the implementation
-comes afterwards, the example would work just as well with the
-implementation before the \main\ and no pre-declarations.  The use of pre-declarations at this point is a lead-in to the usage of header files which are later introduced in example 5.
+In this example, the function pre-declarations are given before the \main\ function and the implementation present afterwards.  However, the example would compile correctly if the pre-declaration was removed and the implementation of the functions was moved to be before the \main\ function.  While this would work within this simple example, it is not possible to use implementations without pre-declarations when functions are dependent on each other.  As programs become more complicated, the pre-declarations are moved into header files and the implementations are moved into associated libraries.  Header files are introduced in example 5.
 
 \paragraph{Conditional statements}
-Common ways of writing conditional statements involve either \texttt{if},~\texttt{if~else},~\texttt{else} or \texttt{switch} statements.  There are other ways of constructing conditional statements but these are not covered in this course.  Starting with \texttt{if},~\texttt{if~else},~\texttt{else} statements, examples of their syntax are given within the \texttt{numFingers} and \texttt{quitTime} functions of example 2.  Each \texttt{if} statement is evaluated such that when the contents of the logic associated with an \texttt{if} statement inside the \texttt{()} brackets is true, then the code within the following compound statement is executed.\texttt{if},~\texttt{if~else},~\texttt{else} statements operate
-sequentially, such that each piece of logic is tested in turn.  If all the logic tests fail then the statement following \texttt{else} is executed.
+Common ways of writing conditional statements involve either \texttt{if},~\texttt{if~else},~\texttt{else} or \texttt{switch} statements.  There are other ways of constructing conditional statements, but these are not covered in this course.  Starting with \texttt{if},~\texttt{if~else},~\texttt{else} statements, examples of their syntax are given within the \texttt{numFingers} and \texttt{quitTime} functions of example 2.  Each \texttt{if} statement is evaluated such that when the contents of the logic associated with an \texttt{if} statement inside the \texttt{()} brackets is true, then the code within the following compound statement is executed.\texttt{if},~\texttt{if~else},~\texttt{else} statements operate
+sequentially, such that each piece of logic is tested in turn.  If all of the logic tests fail, then the statement following \texttt{else} is executed.
 
 In some cases where simple sorting is needed a \texttt{switch}
 statement is a better choice than a long
 \texttt{if},~\texttt{if~else}...~\texttt{else} statement.  An example
 \texttt{switch} statement is given in the \texttt{pickColour} function
 of example 2.  While faster than an
-\texttt{if},~\texttt{if~else},~\texttt{else} statement in some cases a
+\texttt{if},~\texttt{if~else},~\texttt{else} statement in some cases, a
 \texttt{switch} statement is limited to simple cases and therefore the
 logic allowed can be somewhat restrictive.
 
 \paragraph{Loops}
 Several types of loops are available to C programmers.  There are
 \texttt{while}, \texttt{do~while} and \texttt{for} loops.  Each of
-these loops continue to loop while a condition is true.  All the logic
+these loops continue to loop while a condition is true.  All of the logic
 available within an \texttt{if} conditional statement is also
 available within these conditional tests.  Instances of these loop
 types can be found within some of the examples within this course.
-Within this section example 2 contains a \texttt{do~while} loop in its
-\main function.  This loop continues while
+For example, example 2 contains a \texttt{do~while} loop in its
+\main\ function.  This loop continues while
 the boolean evaluated within the \texttt{while(~);} is true.  This
-remains true until the function \texttt{quitTime} returns a true.  The
+remains true until the function \texttt{quitTime} returns true.  The
 \texttt{while} loop tests on NOT \texttt{quitTime} return value.
 
 \subsection{Pointers and arrays \label{section:pointersarrays}}
 
-Many languages use pointers implicitly such as \fortran\ and Java.  In
-C pointers are used explicitly.  This section introduces the concept
-of a pointer and demonstrates two basic implementations.  The design
-of the program is given in \flo\ form in
-figure~\ref{figure:flowchart_ex3} and in \psc\ form in
-\psc~\ref{pseudo:ex3}.
+Many languages use pointers implicitly, such as implemented in \fortran\ and Java.  In the 
+C programming language pointers are implemented explicitly.  Therefore, if a pointer has not been implemented, a normal variable will be used.  The source code in the \texttt{example_03} subdirectory contains an example of pointer functionality and illustrates the difference between a pointer and a normal variable.  The design of example 3 is given as a \flo\ in Figure~\ref{figure:flowchart_ex3} and as \psc\ in \psc~\ref{pseudo:ex3}.
 
 \begin{figure}[h]
 \begin{center}
 \includegraphics[height=11cm]{figures/ex3}
-\caption{A flowchart describing the \main\ function of example 3
+\caption{A flowchart illustration of the \main\ function of example 3
 \label{figure:flowchart_ex3}}
 \end{center}
 \end{figure}
@@ -332,49 +311,29 @@ fun(value and pointer)
   Assign a number to the local variable.
   Assign a number to the memory the pointer points to.
 \end{verbatim}
-\caption{Example 3 in pseudocode \label{pseudo:ex3}}
+\caption{A pseudocode implementation of example 3 \label{pseudo:ex3}}
 \end{pseudocode}
 
-Pointers are called pointers because they point to a memory address.
-A pointer can be used to access the memory address to which it points
-or the value contained within the memory address.  The C
-implementation of example 3 introduces pointers.  Looking at example 3
-there are two distinct parts to the program: the call to the function
-\texttt{fun} and the indexing of array \texttt{v[]}.
+Pointers are used to point to a memory address.  Once initialised, a pointer can be used to access a memory address or the value stored in the memory address.  In example 3, there are two distinct parts to the program: (i) the call to the function
+\texttt{fun} and (ii) the iteration over the array \texttt{v[]}.
 
 \paragraph{Functions and pointers}
 The function \texttt{fun} is declared as 
 \begin{lstlisting}
 void fun(int, int *);
 \end{lstlisting}
-with input parameter types \texttt{int} and \texttt{int *}.  The
-second input parameter is a pointer.  When the function is called the
-memory address of \texttt{p}, \texttt{\&p} is assigned to the pointer
-declared in \texttt{fun}.  The importance of using a pointer in this
-fashion can be seen from running the program.  After calling
-\texttt{fun}, \texttt{np} contains the same value which it contained
-before the function call, while the value contained in \texttt{p} is
-the value assigned via the pointer in
-\texttt{fun}.  Stepping through the program this can be explained.
-Both \texttt{np} and \texttt{p} are initialised in the \main\ with the
-value one.
+with input parameter types \texttt{int} and \texttt{int *}, where the second input parameter is a pointer.  When the function is called the memory address of \texttt{p} (\texttt{\&p}) is assigned to the pointer declared in \texttt{fun}.  The difference between the behaviour of a pointer and a normal local variable can be seen by running the program.  After the function \texttt{fun} is called, the variable \texttt{np} contains the same value that it contained before the function call.  However, the value of the variable \texttt{p} is modified when the function \texttt{fun} is called.  Both \texttt{np} and \texttt{p} are initialised in the \main\ function with the same value:
 \begin{lstlisting}
 int np = 1, p = 1;
 \end{lstlisting}
-At the point of initialisation an \texttt{int} sized block of memory
-is allocated to \texttt{np} and \texttt{p}.  Then the function
-\texttt{fun} is called with the value of \texttt{np} (default in C) and the
-address of \texttt{p}.  Within the function \texttt{fun} a new block
-of memory is allocated for the local variable \texttt{np} distinct
+At the point of initialisation an \texttt{int} sized block of memory is allocated to \texttt{np} and \texttt{p}.  Then the function
+\texttt{fun} is called with the value of \texttt{np} and the
+address of \texttt{p}.  Within the function \texttt{fun}, a new block
+of memory is allocated for the local variable \texttt{np} that is distinct
 from the variable contained in the \main\ function.  This memory is
-given the value from the parameter \texttt{np} contained within
-\main.  The value 2 is assigned to the local variable \texttt{np}
-and as the function exits, the memory of the local variable \texttt{np}
-is deleted.  Therefore the value is never set within the \main\
-function.  Unlike \texttt{np} the value of the variable \texttt{p}
-declared within
-the \main\ is set by using a pointer.  The pointer is initialised with the
-memory address of the variable \texttt{p} contained within the \main\
+assigned the value from the variable \texttt{np} that was declared in the \main\ function.  In the function \texttt{fun} the value of the local variable \texttt{np} is modified and then lost as the function exits.  Therefore, the value of the variable \texttt{np} declared in the \main\ function is not modified.
+%% HHH
+Unlike the variable \texttt{np}, the value of the variable \texttt{p} declared within the \main\ is set by using a pointer.  The pointer is initialised with the memory address of the variable \texttt{p} contained within the \main\
 function.  Then the memory address pointed to by the pointer
 \texttt{*p} is assigned the value 2.  Therefore when returning to the
 \main\ function the value contained in the memory of \texttt{p} is
@@ -467,10 +426,10 @@ program.  The operating system allocates the memory for
 \texttt{*argv[]} and initialises it with the input command line
 arguments.  The first element of the \texttt{argv} array contains the
 name of the executable.  The second element exists only if there is a
-argument following the name of the executable, etc.  The parameter
+argument following the name of the executable, etc..  The parameter
 \texttt{argc} is initialised by the operating system with the number
 of elements in the \texttt{argv} array.  While it may seem odd to
-include the name of the executable in this list it can infact be
+include the name of the executable in this list it can in fact be
 very useful.  For example, if a program has been written to do several
 tasks a symbolic link can be used to control which task it performs.
 The logic of this can be tested out using example 4 by typing
@@ -1356,13 +1315,8 @@ run after the C program has exited.
 \newpage
 
 \subsection{Problem}
-Programs are often written to interface with hardware, for slow control or 
-data acquisition.  Since the \linux\ lab does not contain any external 
-hardware this problem concerns monitoring the computer itself.
-
-A program is provided which requests more and more memory by calling
-\texttt{malloc}.  After some period of time the program then frees the
-dynamically allocated memory by calling \texttt{free}.  Write a
+Computers can be used to monitor other hardware or themselves.  In the \texttt{problem_02} subdirectory there is a program that requests memory using the \texttt{malloc} function.  Then after some period of time, the program then frees the
+dynamically allocated memory by calling the \texttt{free} function.  Write a
 program to monitor the total memory used every second for a given
 number of minutes.  The program should finish by plotting the total
 memory usage as a function of time.  Once the pseudocode and
@@ -1403,7 +1357,7 @@ struct sysinfo {
 \end{lstlisting}
 %
 Use the \texttt{sleep} command used in
-\texttt{problem/resource\_hog/main.c} to sleep for 1 second between
+\texttt{problem/resource\_hog/main.c} to sleep for one second between
 measurements.  This will prevent the monitoring program from using
 up a lot of CPU, which would affect the results.  More information can
 be found in the manual page by typing
@@ -1686,12 +1640,9 @@ included in the link step by simply adding \texttt{-lm} to the link line.
 \newpage
 
 \subsection{Problem}
-In \texttt{lab3/problem/generator} is a program to produce B meson pairs
-using the PYTHIA\cite{pythia} event generator.  The program should be
+The \texttt{problem_03/generator} directory contains a program that generates simulated B meson pairs, using the PYTHIA\cite{pythia} event generator.  The program should be
 compiled and run as specified in the \texttt{README} file to generate
-at least 5000 events.  (On the \linux\ cluster the data file has already
-been made.  Please use this data file rather than re-run the generator
-program.)
+at least 5000 events.
 
 Write a program to read the \texttt{HEPEVT} event records from the
 binary file\\ \texttt{data/pptobbar\_hepevt.dat}.  Histogram the

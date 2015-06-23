@@ -3,13 +3,16 @@ base_dir=${PWD}
 dirs = hepevt histo pythia
 
 
-all:
+all:	lib
 	@echo "**"
 	@echo "** Building all libraries"
 	@echo "**" 
 	for dir in ${dirs}; do \
 	  cd ${base_dir}/$$dir && $(MAKE); \
 	done
+
+lib:
+	mkdir -p lib
 
 clean: 
 	@echo "**"

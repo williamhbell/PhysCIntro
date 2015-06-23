@@ -3,9 +3,10 @@ CC = gcc
 TARGET=pptobbar
 
 OBJECTS=main.o 
+SUPPORT_DIR=../../support
 
-LIBS=-L$(CLAB_SUPPORT_DIR)/lib -lpythia -lhepevt -lg2c
-INCFLAGS=-I$(CLAB_SUPPORT_DIR)/include/pythia -I$(CLAB_SUPPORT_DIR)/include/hepevt
+LIBS=-L$(SUPPORT_DIR)/lib -lpythia -lhepevt -lgfortran -lm
+INCFLAGS=-I$(SUPPORT_DIR)/include/pythia -I$(SUPPORT_DIR)/include/hepevt
 
 $(TARGET).exe: $(OBJECTS)
 	@echo "**"
